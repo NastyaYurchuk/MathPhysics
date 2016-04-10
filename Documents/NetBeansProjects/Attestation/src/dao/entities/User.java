@@ -56,6 +56,7 @@ public class User {
     public  boolean isEmpty(){
         return login.isEmpty();
     }
+    
     public User(int ID, String login, String name, String password,  String isAdmin) {
         this.id = ID;
         this.login = login;
@@ -63,9 +64,5 @@ public class User {
         this.name = name;
         this.isAdmin = isAdmin;
     }
-    public  User(){
-        
-    }
-    
     
 }
