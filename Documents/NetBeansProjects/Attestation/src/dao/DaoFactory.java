@@ -5,9 +5,6 @@
  */
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class DaoFactory {
     
  public abstract UserDao createUserDao();
