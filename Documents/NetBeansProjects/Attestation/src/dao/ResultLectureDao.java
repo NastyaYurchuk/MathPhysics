@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dao;
 
 import dao.entities.LecturerWorkload;
@@ -36,7 +32,7 @@ public interface ResultLectureDao {
 
    void update(Date oldDate, LecturerWorkload lecturerWorkload, int newMark, Date newDate);
 
-    public void updateMark(List<ResultLecture> changeList);
+   public void updateMark(List<ResultLecture> changeList);
  
    
    
