@@ -15,6 +15,10 @@ public class User {
     private String password;
     private String name;
     private String isAdmin;
+
+    public User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public int getID() {
