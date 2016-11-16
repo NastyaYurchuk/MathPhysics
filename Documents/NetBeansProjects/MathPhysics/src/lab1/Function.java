@@ -10,6 +10,12 @@ package lab1;
  * @author nastja
  */
 public class Function {
+    public int variant;
+
+    public Function(int variant) {
+        this.variant = variant;
+    }
+    
     
     public static double getValueF(double x){
         
@@ -43,4 +49,50 @@ public class Function {
             16 *  Math.exp(3 * x + 12) + 124 * Math.exp(6 * x + 6) - 95 * Math.exp(12) + 62 * Math.exp(6)) / (162 *(1 + 2 * Math.exp(12)));
     }
     
+    public double getValueFi(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = x;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
+    
+    public double getValueVi(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = x;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
+    
+     public double getValueQi(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = x;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
+     public double getValueKi(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = x;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
 }
