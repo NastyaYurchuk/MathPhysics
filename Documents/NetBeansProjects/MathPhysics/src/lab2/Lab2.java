@@ -5,6 +5,9 @@
  */
 package lab2;
 
+import lab1.Function;
+import lab1.Tridiagonal;
+
 /**
  *
  * @author nastja
@@ -12,6 +15,7 @@ package lab2;
 public class Lab2 {
     
     public static void main(String[] args) {
-        
+         
+         Tridiagonal tridiagonal = new Tridiagonal(new Function(1), double l,  double gamma1, double gamma2 );
     }
 }

@@ -20,10 +20,10 @@ public class Tridiagonal {
     public double beta;
     public double gamma1;
     public double gamma2;
-    public Function kF;
-    public Function vF;
-    public Function qF;
-    public Function fF;
+ //   public Function kF;
+ //   public Function vF;
+//    public Function qF;
+    public Function f;
 
     public Tridiagonal(double l, double k, double beta, double gamma1, double gamma2) {
         this.k = k;
@@ -33,11 +33,8 @@ public class Tridiagonal {
         this.l = l;
     }
     
-    public Tridiagonal(Function kF, Function vF, Function qF, Function fF, double l,  double gamma1, double gamma2 ){
-        this.fF = fF;
-        this.kF = kF;
-        this.qF = qF;
-        this.vF  = vF;
+    public Tridiagonal(Function fF, double l,  double gamma1, double gamma2 ){
+        this.f = fF;
         this.gamma1 = gamma1;
         this.gamma2 = gamma2;
         this.l = l;
@@ -50,18 +47,18 @@ public class Tridiagonal {
         double c[] = new double[n+1];
         double g[] = new double[n+1];
         double[] b  = new double[n + 1];
-        g[0] = this.fF.getValueFi(0);
-        g[0] = this.fF.getValueFi(l);
+        g[0] = this.f.getValueFi(0);
+        g[0] = this.f.getValueFi(l);
         
         a[0] = 0;
         c[0] = this.gamma1;
         b[0] = 0;
         b[n] = this.gamma2;
          for (int i = 1; i < n; i++) {
-            b[i] = (-1) * (this.qF.getValueQi(i * STEP) + (this.kF.getValueKi(i - STEP * 0.5) + this.kF.getValueKi(i + STEP * 0.5) ) / (Math.pow(STEP, 2)));
-            a[i] = (-1) * ((-1) * this.vF.getValueVi(i * STEP) / (2 * STEP) + this.kF.getValueKi(i - STEP * 0.5)/ (Math.pow(STEP, 2)));
-            c[i] = (-1) * (this.vF.getValueVi(i * STEP) / (2 * STEP) + this.kF.getValueKi(i +  STEP * 0.5)/ (Math.pow(STEP, 2)));;  
-            g[i] = this.fF.getValueFi(i * STEP);
+            b[i] = (-1) * (this.f.getValueQi(i * STEP) + (this.f.getValueKi(i - STEP * 0.5) + this.f.getValueKi(i + STEP * 0.5) ) / (Math.pow(STEP, 2)));
+            a[i] = (-1) * ((-1) * this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i - STEP * 0.5)/ (Math.pow(STEP, 2)));
+            c[i] = (-1) * (this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i +  STEP * 0.5)/ (Math.pow(STEP, 2)));;  
+            g[i] = this.f.getValueFi(i * STEP);
        }
          System.out.println("a " + Arrays.toString(a));
          System.out.println("b " + Arrays.toString(b));
