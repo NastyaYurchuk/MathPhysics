@@ -53,7 +53,10 @@ public class Function {
         double value;
         switch (this.variant) {
             case 1:
-                value = x;
+                value = 0;
+                break;
+            case 2:
+                value = 0;
                 break;
             default:
                 throw new AssertionError();
@@ -65,7 +68,10 @@ public class Function {
         double value;
         switch (this.variant) {
             case 1:
-                value = 4;
+                value = 20;
+                break;
+            case 2:
+                value = 1;
                 break;
             default:
                 throw new AssertionError();
@@ -77,6 +83,9 @@ public class Function {
         double value;
         switch (this.variant) {
             case 1:
+                value = 21;
+                break;
+            case 2:
                 value = 1;
                 break;
             default:
@@ -88,6 +97,9 @@ public class Function {
         double value;
         switch (this.variant) {
             case 1:
+                value = 1;
+                break;
+            case 2:
                 value = 1;
                 break;
             default:

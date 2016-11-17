@@ -16,6 +16,8 @@ public class Lab2 {
     
     public static void main(String[] args) {
          
-         Tridiagonal tridiagonal = new Tridiagonal(new Function(1), double l,  double gamma1, double gamma2 );
+        Tridiagonal tridiagonal = new Tridiagonal(new Function(1), 4, 2, 2);
+       //  Tridiagonal tridiagonal = new Tridiagonal(new Function(2), 2, 0, 1);
+         tridiagonal.solveDiffusionEqFirst();
     }
 }

@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class Tridiagonal {
     
-    public static final double STEP = 0.1;
+    public static final double STEP = 0.2;
     public double l;
     public double k;
     public double beta;
@@ -47,19 +47,25 @@ public class Tridiagonal {
         double c[] = new double[n+1];
         double g[] = new double[n+1];
         double[] b  = new double[n + 1];
-        g[0] = this.f.getValueFi(0);
-        g[0] = this.f.getValueFi(l);
+        g[0] = this.gamma1;;
+        g[n] = this.gamma2;
         
         a[0] = 0;
-        c[0] = this.gamma1;
-        b[0] = 0;
-        b[n] = this.gamma2;
-         for (int i = 1; i < n; i++) {
-            b[i] = (-1) * (this.f.getValueQi(i * STEP) + (this.f.getValueKi(i - STEP * 0.5) + this.f.getValueKi(i + STEP * 0.5) ) / (Math.pow(STEP, 2)));
-            a[i] = (-1) * ((-1) * this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i - STEP * 0.5)/ (Math.pow(STEP, 2)));
-            c[i] = (-1) * (this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i +  STEP * 0.5)/ (Math.pow(STEP, 2)));;  
+      //  a[n] = 1;
+        b[0] = - 1;
+        c[0] = 0;
+        b[n]= - this.gamma2;
+        //c[n] = this.gamma2;
+         for (int i = 1; i < n + 1; i++) {
+            b[i] = (this.f.getValueQi(i * STEP) + (this.f.getValueKi(i - STEP * 0.5) + this.f.getValueKi(i + STEP * 0.5) ) / (Math.pow(STEP, 2)));
+            a[i] = ((-1) * this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i - STEP * 0.5)/ (Math.pow(STEP, 2)));
+            c[i] = (this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i +  STEP * 0.5)/ (Math.pow(STEP, 2)));  
             g[i] = this.f.getValueFi(i * STEP);
-       }
+       } 
+         System.out.println("q " + this.f.getValueQi(1 * STEP));
+         System.out.println("f" + this.f.getValueFi(1 * STEP));
+         System.out.println("k" + this.f.getValueKi(1 * STEP));
+         System.out.println("v" + this.f.getValueVi(1 * STEP));
          System.out.println("a " + Arrays.toString(a));
          System.out.println("b " + Arrays.toString(b));
          System.out.println("c " + Arrays.toString(c));
@@ -87,6 +93,9 @@ public class Tridiagonal {
             c[i] = (-1) * k / Math.pow(STEP, 2);  
             g[i] = Function.getValueF2(i * STEP);
        }
+       System.out.println("a " + Arrays.toString(a));
+         System.out.println("b " + Arrays.toString(b));
+         System.out.println("c " + Arrays.toString(c));
        double[] y = getSolution(n, c, b, a, g);
         return y;
         
@@ -111,6 +120,9 @@ public class Tridiagonal {
             c[i] = (-1) * k / Math.pow(STEP, 2);  
             g[i] = Function.getValueF2(i * STEP);
        }
+       System.out.println("a " + Arrays.toString(a));
+         System.out.println("b " + Arrays.toString(b));
+         System.out.println("c " + Arrays.toString(c));
        double[] y = getSolution(n, c, b, a, g);
         return y;
         
@@ -119,17 +131,22 @@ public class Tridiagonal {
     private double[] getSolution(int n, double[] c, double[] b, double[] a, double[] g) {
         double[] s = new double[n + 1];
         double[] t = new double[n + 1];
-        s[0] = c[0] /b[0];
+        s[0] = c[0]/ b[0];
         t[0] = (- 1) * g[0] / b[0];
+        
         for (int i = 1; i < t.length; i++) {
             s[i] = c[i] / (b[i] - s[i-1] * a[i]);
             t[i] = ( t[i-1] * a[i] - g[i] ) / (b[i] - s[i-1] * a[i]); 
         }
+        t[n] = this.gamma1;//for 8
+        System.out.println("s " + Arrays.toString(s));
+        System.out.println("t " + Arrays.toString(t));
         double[] y = new double[n + 1];
         y[n ] = t[n];
         for (int i = n - 1; i >= 0; i--) {
             y[i] = s[i] * y[i + 1] + t[i]; 
         }
+        System.out.println("y " + Arrays.toString(y));
         return y;
     }
 
