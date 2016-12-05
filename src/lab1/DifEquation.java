@@ -5,6 +5,8 @@
  */
 package lab1;
 
+import func.Function;
+
 /**
  *
  * @author nastja

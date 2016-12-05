@@ -5,6 +5,7 @@
  */
 package lab1;
 
+import func.Function;
 import chart.DualAxis;
 import chart.XYChart;
 import java.text.DecimalFormat;
@@ -33,7 +34,7 @@ public class Lab1 {
         for (int i = 0; i < yAnalit.length; i++) {
             x[i] = i * h;
             yAnalit[i] = Function.solveSecond1(x[i]); 
-            //yAnalit[i] = Function.solveFirst(x[i]);
+           // yAnalit[i] = Function.solveFirst(x[i]);
         }
       
        // Tridiagonal tridiagonal = new Tridiagonal(1, 1, 1, 1, 2);
@@ -42,9 +43,6 @@ public class Lab1 {
         double[] y1 = tridiagonal.solve();
         
        double[] y2 = tridiagonal.solveFictNode();
-       System.out.println(Arrays.toString(yAnalit));
-        System.out.println(Arrays.toString(y1));
-        System.out.println(Arrays.toString(y2));
         DecimalFormat  xFormat = new DecimalFormat("0.##");
         DecimalFormat  yFormat = new DecimalFormat("0.######");
       String  number;
@@ -52,11 +50,16 @@ public class Lab1 {
         System.out.println("x       Analytical    Numerical    Numerical with approximation ");
         for (int i = 0; i < yAnalit.length; i++) {
            number = xFormat.format(x[i]);
-            System.out.println(number +"       " +yFormat.format(yAnalit[i]) + "      " + yFormat.format(y1[i]) + "      " + yFormat.format(y2[i]));
-            
+           System.out.println(number +"       " +yFormat.format(yAnalit[i]) + "      " + yFormat.format(y1[i]) + "      " + yFormat.format(y2[i]));
+       //         System.out.println(number +"       " +yFormat.format(yAnalit[i]) + "      " + yFormat.format(yFourier[i]));
         }
+     /*   XYChart[] demoarr = new XYChart[2];
+        demoarr[0] = new XYChart("Dual","",x, yAnalit, y1, y2) ;
+        demoarr[1] = new XYChart("Dual","",x, y1, yAnalit, y2) ;*/
+     
+//        demoarr[2] = new XYChart("Dual","",x, yAnalit, y1, y2) ;
       //  System.out.println(Arrays.toString(y2));
-       final XYChart demo = new XYChart("Dual","",x, yAnalit, y1, y2);
+        XYChart demo = new XYChart("Dual","",x, yAnalit, y1, y2) ;
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);

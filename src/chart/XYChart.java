@@ -42,8 +42,40 @@ public class XYChart extends ApplicationFrame
          "" ,
          createDatasetForThree( xData, YDataAnalitic, YDataNumerical1, YDataNumerical2),
          PlotOrientation.VERTICAL ,
-         true , true , false);
-       System.out.println("vvvv");  
+         true , true , false); 
+      ChartPanel chartPanel = new ChartPanel( xylineChart );
+      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+      final XYPlot plot = xylineChart.getXYPlot( );
+      XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer( );
+      renderer.setSeriesPaint( 0 , Color.RED );
+      renderer.setSeriesPaint( 1 , Color.GREEN );
+      renderer.setSeriesPaint(2, Color.YELLOW);
+      renderer.setSeriesPaint(3, Color.BLUE);
+      renderer.setSeriesStroke( 0 , new BasicStroke( 1.0f ) );
+       renderer.setSeriesStroke( 1 , new BasicStroke( 1.0f ) );
+       renderer.setSeriesStroke( 2 , new BasicStroke( 1.0f ) );
+       renderer.setSeriesStroke( 3 , new BasicStroke( 1.0f ) );
+      plot.setRenderer( renderer ); 
+      setContentPane( chartPanel ); 
+      
+     // panel.removeAll();
+    //  panel.add(chartPanel);
+    //  panel.validate();
+      
+   }
+   public XYChart( String applicationTitle, String chartTitle,  double[] xData, 
+            double[] YDataAnalitic, double[] YDataNumerical1,double[] YDataNumerical2, double[] YDataNumerical3 )
+   {
+     
+      super(applicationTitle);
+      
+      JFreeChart xylineChart = ChartFactory.createXYLineChart(
+         chartTitle ,
+         "" ,
+         "" ,
+         createDatasetForFour(xData, YDataAnalitic, YDataNumerical1, YDataNumerical2, YDataNumerical3),
+         PlotOrientation.VERTICAL ,
+         true , true , false); 
       ChartPanel chartPanel = new ChartPanel( xylineChart );
       chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
       final XYPlot plot = xylineChart.getXYPlot( );
@@ -136,6 +168,28 @@ public class XYChart extends ApplicationFrame
       dataset.addSeries(analytical );          
       dataset.addSeries( numerical ); 
       dataset.addSeries(numericalApp);
+     // dataset.addSeries( iexplorer );
+      return dataset;
+   }
+    
+     private XYDataset createDatasetForFour(double[] xData, 
+            double[] YDataAnalitic, double[] YDataNumerical1,double[] YDataNumerical2, double[] YDataNumerical3 )
+   {
+      final XYSeries analytical = new XYSeries( "Analytical" ); 
+      final XYSeries numerical1= new XYSeries( "Sample" );
+      final XYSeries numerical2 = new XYSeries( "Samarskiy" );
+      final XYSeries numerical3  = new XYSeries( "Reynolds" );
+    for (int i = 0; i < xData.length; i++) {     
+                 analytical.add( xData[i], (Number)YDataAnalitic[i]);
+                 numerical1.add( xData[i], (Number)YDataNumerical1[i]);
+                 numerical2.add( xData[i], (Number)YDataNumerical2[i]);
+                 numerical3.add(xData[i], (Number)YDataNumerical3[i]);
+             }                 
+      final XYSeriesCollection dataset = new XYSeriesCollection( );          
+      dataset.addSeries(analytical );          
+      dataset.addSeries( numerical1 ); 
+      dataset.addSeries(numerical2);
+       dataset.addSeries(numerical3);
      // dataset.addSeries( iexplorer );
       return dataset;
    }

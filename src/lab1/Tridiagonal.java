@@ -5,6 +5,7 @@
  */
 package lab1;
 
+import func.Function;
 import java.util.Arrays;
 
 
@@ -14,7 +15,7 @@ import java.util.Arrays;
  */
 public class Tridiagonal {
     
-    public static final double STEP = 0.25;
+    public static final double STEP = 0.1;
     public double l;
     public double k;
     public double beta;
@@ -56,10 +57,10 @@ public class Tridiagonal {
         b[n]= - this.gamma2;
         //c[n] = this.gamma2;
          for (int i = 1; i < n + 1; i++) {
-            b[i] = (this.f.getValueQi(i * STEP) + (this.f.getValueKi(i - STEP * 0.5) + this.f.getValueKi(i + STEP * 0.5) ) / (Math.pow(STEP, 2)));
-            a[i] = ((-1) * this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i - STEP * 0.5)/ (Math.pow(STEP, 2)));
-            c[i] = (this.f.getValueVi(i * STEP) / (2 * STEP) + this.f.getValueKi(i +  STEP * 0.5)/ (Math.pow(STEP, 2)));  
-            g[i] = this.f.getValueFi(i * STEP);
+            b[i] = (this.f.getQi(i * STEP) + (this.f.getKi(i - STEP * 0.5) + this.f.getKi(i + STEP * 0.5) ) / (Math.pow(STEP, 2)));
+            a[i] = ((-1) * this.f.getVi(i * STEP) / (2 * STEP) + this.f.getKi(i - STEP * 0.5)/ (Math.pow(STEP, 2)));
+            c[i] = (this.f.getVi(i * STEP) / (2 * STEP) + this.f.getKi(i +  STEP * 0.5)/ (Math.pow(STEP, 2)));  
+            g[i] = this.f.getFi(i * STEP);
        } 
 
         double[] y = getSolution(n, c, b, a, g);
@@ -84,20 +85,20 @@ public class Tridiagonal {
         b[n]= - this.gamma2;
         //c[n] = this.gamma2;
          for (int i = 1; i < n + 1; i++) {
-            b[i] = (f.getValueKi((i - 0.5) * STEP)*(- f.getValueKi(i * STEP) + f.getValueViMin(i * STEP) * STEP ) 
-                    - f.getValueKi((i - 0.5) * STEP)*( f.getValueKi(i * STEP) + f.getValueViPlus(i * STEP) * STEP ))
-                    / (STEP * STEP * f.getValueKi( i * STEP)) - f.getValueQi(i * STEP);  
-            a[i] = (-1) * (f.getValueKi((i - 0.5) * STEP)*(f.getValueKi(i * STEP)  - f.getValueViMin(i * STEP) * STEP)) / (STEP * STEP * f.getValueKi( i * STEP));   ;
-            c[i] = (-1) * (f.getValueKi((i + 0.5) * STEP)*(f.getValueKi(i * STEP)  + f.getValueViPlus(i * STEP) * STEP)) / (STEP * STEP * f.getValueKi( i * STEP));  
-            g[i] = f.getValueFi(i * STEP);
+            b[i] = (f.getKi((i - 0.5) * STEP)*(- f.getKi(i * STEP) + f.getViMin(i * STEP) * STEP ) 
+                    - f.getKi((i - 0.5) * STEP)*( f.getKi(i * STEP) + f.getViPlus(i * STEP) * STEP ))
+                    / (STEP * STEP * f.getKi( i * STEP)) - f.getQi(i * STEP);  
+            a[i] = (-1) * (f.getKi((i - 0.5) * STEP)*(f.getKi(i * STEP)  - f.getViMin(i * STEP) * STEP)) / (STEP * STEP * f.getKi( i * STEP));   ;
+            c[i] = (-1) * (f.getKi((i + 0.5) * STEP)*(f.getKi(i * STEP)  + f.getViPlus(i * STEP) * STEP)) / (STEP * STEP * f.getKi( i * STEP));  
+            g[i] = f.getFi(i * STEP);
        } 
         
-         System.out.println("q " + this.f.getValueQi(1 * STEP));
-         System.out.println("f" + this.f.getValueFi(1 * STEP));
-         System.out.println("k" + this.f.getValueKi(1 * STEP));
-         System.out.println("v" + this.f.getValueVi(1 * STEP));
-         System.out.println("getValueViMin"+ f.getValueViMin(1 * STEP));
-         System.out.println("getValueViPlus"+ f.getValueViPlus(1 * STEP));
+         System.out.println("q " + this.f.getQi(1 * STEP));
+         System.out.println("f" + this.f.getFi(1 * STEP));
+         System.out.println("k" + this.f.getKi(1 * STEP));
+         System.out.println("v" + this.f.getVi(1 * STEP));
+         System.out.println("getValueViMin"+ f.getViMin(1 * STEP));
+         System.out.println("getValueViPlus"+ f.getViPlus(1 * STEP));
          System.out.println("a " + Arrays.toString(a));
          System.out.println("b " + Arrays.toString(b));
          System.out.println("c " + Arrays.toString(c));
@@ -123,14 +124,14 @@ public class Tridiagonal {
         b[n]= - this.gamma2;
         //c[n] = this.gamma2;
          for (int i = 1; i < n + 1; i++) {
-            b[i] = ((f.getValueViMin(i * STEP) * f.getValueKi((i - 0.5) * STEP)/(STEP * f.getValueKi(i * STEP)) - f.getValueViPlus(i * STEP) * f.getValueKi(i) )/(STEP * f.getValueKi(i * STEP))
-                    - ((f.getValueKi( (i + 0.5) * STEP) + f.getValueKi( (i - 0.5) * STEP))/( STEP * STEP * (1 + f.getValueRi(i  * STEP)))) 
-                    - f.getValueQi(i * STEP));  
-            a[i] = (-1) *( (f.getValueKi(( i - 0.5) * STEP)/( STEP * STEP * (1 + f.getValueRi(i  * STEP)) )) -
-                    f.getValueViMin(i * STEP) * f.getValueKi(( i - 0.5) * STEP)/((f.getValueKi(i * STEP)) * STEP));   
-            c[i] = (-1) * (f.getValueKi(( i + 0.5) * STEP)/ STEP) *
-                    (1 / (STEP * (1 + f.getValueRi(i  * STEP))) + f.getValueViPlus(i * STEP)/f.getValueKi(i * STEP));  
-            g[i] = f.getValueFi(i * STEP);
+            b[i] = ((f.getViMin(i * STEP) * f.getKi((i - 0.5) * STEP)/(STEP * f.getKi(i * STEP)) - f.getViPlus(i * STEP) * f.getKi(i) )/(STEP * f.getKi(i * STEP))
+                    - ((f.getKi( (i + 0.5) * STEP) + f.getKi( (i - 0.5) * STEP))/( STEP * STEP * (1 + f.getRi(i  * STEP)))) 
+                    - f.getQi(i * STEP));  
+            a[i] = (-1) *( (f.getKi(( i - 0.5) * STEP)/( STEP * STEP * (1 + f.getRi(i  * STEP)) )) -
+                    f.getViMin(i * STEP) * f.getKi(( i - 0.5) * STEP)/((f.getKi(i * STEP)) * STEP));   
+            c[i] = (-1) * (f.getKi(( i + 0.5) * STEP)/ STEP) *
+                    (1 / (STEP * (1 + f.getRi(i  * STEP))) + f.getViPlus(i * STEP)/f.getKi(i * STEP));  
+            g[i] = f.getFi(i * STEP);
        } 
         
       double[] y = getSolution(n, c, b, a, g);

@@ -5,6 +5,7 @@
  */
 package lab1;
 
+import func.Function;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Arrays;
  */
 public class Fourier {
     
-    public static final double STEP = 0.1;
+    public static final double STEP = 0.2;
     public double l;
 
     public Fourier(double l) {
@@ -32,21 +33,19 @@ public class Fourier {
                    
             }
             
-            System.out.println(i + ". coefFourier " + coefFourier[i]);
         }
-        System.out.println(Arrays.toString(coefFourier));
-        System.out.println("coef length = " + coefFourier.length);
+        
         double[] yi = new double[n + 1];
         
        yi[0] = 0;
        yi[n] = 0;
         for (int i = 1; i < n ; i++) {
             for (int j = 0; j < k; j++) {
-                System.out.println(j + ". ck" + (coefFourier[j] / eigenValue(j)) );
+            //    System.out.println(j + ". ck" + (coefFourier[j] / eigenValue(j)) );
                 yi[i] += eigenFunc((i - 1) , j) * coefFourier[j] / eigenValue(j);
                 
             }
-           System.out.println(i + ". yi" + yi[i]);
+        //   System.out.println(i + ". yi" + yi[i]);
         }
         
         return yi;

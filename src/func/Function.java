@@ -33,7 +33,7 @@ public class Function {
          return   2 * Math.pow(x, 2) + 2 * x;
     }
     public static double getValueG(double x){
-        
+        double value;
      //  return 1;
         return  9;
     }
@@ -51,7 +51,7 @@ public class Function {
             16 *  Math.exp(3 * x + 12) + 124 * Math.exp(6 * x + 6) - 95 * Math.exp(12) + 62 * Math.exp(6)) / (162 *(1 + 2 * Math.exp(12)));
     }
     
-    public double getValueFi(double x){
+    public double getFi(double x){
         double value;
         switch (this.variant) {
             case 1:
@@ -69,7 +69,7 @@ public class Function {
       return value;          
     }
     
-    public double getValueVi(double x){
+    public double getVi(double x){
         double value;
         switch (this.variant) {
             case 1:
@@ -86,16 +86,16 @@ public class Function {
         }
       return value;          
     }
-    public double getValueViPlus(double x){
+    public double getViPlus(double x){
 
-      return 0.5 * (this.getValueVi(x) + Math.abs(this.getValueVi(x)));          
+      return 0.5 * (this.getVi(x) + Math.abs(this.getVi(x)));          
     }
-    public double getValueViMin(double x){
+    public double getViMin(double x){
      
-      return 0.5 * (this.getValueVi(x) - Math.abs(this.getValueVi(x)));           
+      return 0.5 * (this.getVi(x) - Math.abs(this.getVi(x)));           
     }
     
-     public double getValueQi(double x){
+     public double getQi(double x){
         double value;
         switch (this.variant) {
             case 1:
@@ -112,7 +112,7 @@ public class Function {
         }
       return value;          
     }
-     public double getValueKi(double x){
+     public double getKi(double x){
         double value;
         switch (this.variant) {
             case 1:
@@ -130,9 +130,9 @@ public class Function {
       return value;          
     }
      
-    public double getValueRi(double x){
+    public double getRi(double x){
         
-      return STEP * Math.abs(getValueVi(x))/ getValueKi(x);          
+      return STEP * Math.abs(getVi(x))/ getKi(x);          
     }
     
     public double getAnalytic(double x){
@@ -155,4 +155,59 @@ public class Function {
         }
       return value;     
     }
+    
+    public double getGi(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = x * x;
+                break;
+            case 2:
+                value = 1;
+                break;
+            case 3:
+                value = 1;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
+    
+    public double getMui(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = 4 * x;
+                break;
+            case 2:
+                value = 1;
+                break;
+            case 3:
+                value = 1;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
+    public double getAi(double x){
+        double value;
+        switch (this.variant) {
+            case 1:
+                value = 1;
+                break;
+            case 2:
+                value = 1;
+                break;
+            case 3:
+                value = 1;
+                break;
+            default:
+                throw new AssertionError();
+        }
+      return value;          
+    }
+    
+  
 }
