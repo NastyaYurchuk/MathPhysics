@@ -6,6 +6,7 @@
 package lab3;
 
 import func.Function;
+import java.util.Arrays;
 
 /**
  *
@@ -13,8 +14,8 @@ import func.Function;
  */
 public class ConvTransfer {
     
-   public static final double H = 0.2;
-   public static final double R = 0.05;
+   public static final double H = 0.4;
+   public static final double R = 0.1;
    
    public double l;
    public Function f;
@@ -31,30 +32,42 @@ public class ConvTransfer {
     public double[][] rightExplicit (){
         int n =  Math.round((float) (this.l/H)) + 1;
         int m = Math.round((float) (this.t/R)) + 1;
-        double [][] y = new double[n][m];
+        double [][] y = new double[m][n];
         
         y[0][0] = f.getMui(0);
-        y[1][0] = f.getGi(H);
+        y[0][1] = f.getGi(H);
         
         for (int k = 0; k < n; k++) {
-            y[k][0] = f.getGi(k * H);
+            y[0][k] = f.getGi(k * H);
             
         }
+        System.out.println("y " + Arrays.toString(y[0]));
         for (int j = 0; j < m - 1; j++) {
             for (int k = 0; k < n; k++) {
                 if (k != 0){
-                     y[k][j + 1] = (1 - a) * y[k][j] + a * R * y[k - 1][j] / H; 
+                     y[j + 1][k] = (1 - a * R / H) * y[j][k] + a * R * y[j][k - 1] / H; 
                 }
                 else {
-                     y[k][j + 1] = f.getMui(j * R);
-                }            
+                     y[j + 1][k] = f.getMui((j + 1) * R);
+                }  
+              
             }
-            
+            System.out.println("y " + Arrays.toString(y[j + 1])); 
         }
         
         
     return y;
     }
    
+    public double[][] rightImplicit(){
+        int n =  Math.round((float) (this.l/H)) + 1;
+        int m = Math.round((float) (this.t/R)) + 1;
+        double [][] y = new double[m][n];
+        
+        y[0][0] = f.getMui(0);
+        y[0][1] = f.getGi(H);
+        
+        return y;
+    }
    
 }
