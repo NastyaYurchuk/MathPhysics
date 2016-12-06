@@ -160,7 +160,7 @@ public class Function {
         double value;
         switch (this.variant) {
             case 1:
-                value = x * x;
+                value = x;
                 break;
             case 2:
                 value = 1;
@@ -178,7 +178,7 @@ public class Function {
         double value;
         switch (this.variant) {
             case 1:
-                value = 4 * x;
+                value =  x;
                 break;
             case 2:
                 value = 1;

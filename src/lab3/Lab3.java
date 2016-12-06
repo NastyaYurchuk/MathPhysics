@@ -21,34 +21,40 @@ public class Lab3 {
         ConvTransfer convTransfer = new ConvTransfer(2, 1, f, 4);
         double[][] y = convTransfer.rightExplicit();
         
-        int n = y.length;
-        int m = y[0].length;
-        double[][] yAnalit = new double[n][m];
+        int m = y.length;
+        int n = y[0].length;
+        System.out.println("n = " + n + " m = " + m);
+        double[][] yAnalit = new double[m][n];
         double x;
         double t;
         double[] xi = new double[n];
-        for (int j = 0; j < yAnalit.length; j++) {
-            for (int k = 0; k < yAnalit.length; k++) {
+        for (int j = 0; j < m; j++) {
+            for (int k = 0; k < n; k++) {
                 x = k * H;
                 t = j * R;
                 xi[k] = k * H;
+               // System.out.println("t " + t);
                 if ( x >= convTransfer.a * t){
-                    System.out.println("x >= at");
-                    yAnalit[k][j] = f.getGi(x - convTransfer.a * t);
+                   // System.out.println("x >= at " + (x));
+                    yAnalit[j][k] = f.getGi(x - convTransfer.a * t);
                    
                 }
                 else {
-                    System.out.println("x < at " + (t - x / convTransfer.a));
-                    yAnalit[k][j] = f.getMui(t - x / convTransfer.a);
+                    //System.out.println("x < at " + x);
+                    yAnalit[j][k] = f.getMui(t - x / convTransfer.a);
                 }
-                 System.out.println(yAnalit[k][j]);
+               
+                 System.out.println(yAnalit[j][k]);
+                 
                // System.out.println(yAnalit[k][j]);
             }
             //System.out.println("");
-            
+        //    System.out.println("j" + yAnalit[][0]);
+        System.out.println( "yAnalit " + Arrays.toString(yAnalit[j]));  
+            System.out.println("y " + Arrays.toString(y[j]));    
         }
-        System.out.println(Arrays.toString(yAnalit[0]));  
+       // System.out.println( "yAnalit " + Arrays.toString(yAnalit[0]));  
         DynamicChart dc = new DynamicChart();
-        dc.build("Lab3", xi, yAnalit);
+        dc.buildAndGo(xi, yAnalit);
     }
 }

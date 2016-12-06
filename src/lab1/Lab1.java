@@ -63,5 +63,6 @@ public class Lab1 {
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
+        
     }
 }
