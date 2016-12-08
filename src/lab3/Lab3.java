@@ -19,10 +19,11 @@ public class Lab3 {
     public static void main(String[] args) {
         Function f = new Function(1);
         ConvTransfer convTransfer = new ConvTransfer(2, 1, f, 4);
-        double[][] y = convTransfer.rightExplicit();
-        
-        int m = y.length;
-        int n = y[0].length;
+        double[][] yEx = convTransfer.rightExplicit();
+        double[][] yIm = convTransfer.rightImplicit();
+        double[][] yCenEx = convTransfer.centralExplicit();
+        int m = yEx.length;
+        int n = yEx[0].length;
         System.out.println("n = " + n + " m = " + m);
         double[][] yAnalit = new double[m][n];
         double x;
@@ -51,7 +52,9 @@ public class Lab3 {
             //System.out.println("");
         //    System.out.println("j" + yAnalit[][0]);
         System.out.println( "yAnalit " + Arrays.toString(yAnalit[j]));  
-            System.out.println("y " + Arrays.toString(y[j]));    
+            System.out.println("yEx " + Arrays.toString(yEx[j]));   
+              System.out.println("yIm " + Arrays.toString(yIm[j]));
+              System.out.println("yCenEx " + Arrays.toString(yCenEx[j])); 
         }
        // System.out.println( "yAnalit " + Arrays.toString(yAnalit[0]));  
         DynamicChart dc = new DynamicChart();

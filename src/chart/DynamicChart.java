@@ -89,7 +89,7 @@ public class DynamicChart {
         //додаємо точки на графіку
        for (int k = 0; k < n; k++) {
                 series.addOrUpdate(x[k], y[0][k]);
-                System.out.println("x " + x[k] + " y " + y[0][k]);
+               // System.out.println("x " + x[k] + " y " + y[0][k]);
             }
 // зразу ж додаємо ряд в набір даних
         XYSeriesCollection data = new XYSeriesCollection(series);
@@ -121,21 +121,21 @@ public class DynamicChart {
         } catch (InterruptedException ex) {
             Logger.getLogger(DynamicChart.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("4 sec");
+       //System.out.println("4 sec");
         for (int j = 1; j < m; j++) {
 
             for (int k = 0; k < n; k++) {
                 //series.addOrUpdate(x[k], y[j][k]);
                 series.updateByIndex(k, y[j][k]);
-                System.out.println("x " + x[k] + " y " + y[j][k]);
+             //   System.out.println("x " + x[k] + " y " + y[j][k]);
             }
-            System.out.println("0 sec");
+          //  System.out.println("0 sec");
         try {
             sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(DynamicChart.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("4 sec");
+     //   System.out.println("4 sec");
         }
         System.out.println("end");
     }
