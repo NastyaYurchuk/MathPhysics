@@ -100,12 +100,41 @@ public class ConvTransfer {
         }
         double cons = a * R / (2 * H);
         for (int j = 0; j < m - 1; j++) {
-            for (int k = 0; k < n; k++) {
-               
+            for (int k = 0; k < n; k++) {              
                 if (k == n - 1){
                     y[j + 1][k] = (y[j][k] + y[j][k - 1] * kh) / (1 + kh); 
                 } else if (k != 0){
                      y[j + 1][k] = (y[j][k - 1] - y[j][k + 1] ) / cons + y[j][k]; 
+                }
+                else {
+                     y[j + 1][k] = f.getMui((j + 1) * R);
+                }  
+               
+            }
+            System.out.println("yCenEx " + Arrays.toString(y[j + 1])); 
+        }
+        return y;
+    }
+     
+      public double[][] centralImplicit(){
+        int n =  Math.round((float) (this.l/H)) + 1;
+        int m = Math.round((float) (this.t/R)) + 1;
+        double [][] y = new double[m][n];
+        
+        y[0][0] = f.getMui(0);
+        y[0][1] = f.getGi(H);
+        double kh = a * R / H;
+         for (int k = 0; k < n; k++) {
+            y[0][k] = f.getGi(k * H);
+            
+        }
+        double cons = a * R / (2 * H);
+        for (int j = 0; j < m - 1; j++) {
+            for (int k = 0; k < n; k++) {              
+                if (k == n - 1){
+                    y[j + 1][k] = (y[j][k] + y[j][k - 1] * kh) / (1 + kh); 
+                } else if (k != 0){
+                     y[j + 1][k] = (y[j + 1][k - 1] - y[j][k + 1] ) / cons + y[j][k]; 
                 }
                 else {
                      y[j + 1][k] = f.getMui((j + 1) * R);
