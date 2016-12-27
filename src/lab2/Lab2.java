@@ -9,7 +9,7 @@ import chart.XYChart;
 import java.text.DecimalFormat;
 import func.Function;
 import lab1.Tridiagonal;
-import static lab1.Tridiagonal.STEP;
+import static lab1.Tridiagonal.H;
 import org.jfree.ui.RefineryUtilities;
 
 /**
@@ -25,11 +25,11 @@ public class Lab2 {
      //   double l = 2;
       double l = 3;
          
-         double[] yAnalit1 = new double [Math.round((float) (l / STEP)) + 1];
-     //    double[] yAnalit2 = new double [Math.round((float) (2 / STEP)) + 1];
-        double[] x  = new double[Math.round((float) (l / STEP)) + 1];
+         double[] yAnalit1 = new double [Math.round((float) (l / H)) + 1];
+     //    double[] yAnalit2 = new double [Math.round((float) (2 / H)) + 1];
+        double[] x  = new double[Math.round((float) (l / H)) + 1];
         for (int i = 0; i < yAnalit1.length; i++) {
-            x[i] = i * STEP;
+            x[i] = i * H;
             yAnalit1[i] = f1.getAnalytic(x[i]); 
           //  yAnalit2[i] = f2.getAnalytic(x[i]); 
            // yAnalit[i] = Function.solveFirst(x[i]);

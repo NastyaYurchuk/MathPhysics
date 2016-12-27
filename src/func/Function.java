@@ -5,7 +5,7 @@
  */
 package func;
 
-import static lab1.Tridiagonal.STEP;
+import static lab1.Tridiagonal.H;
 
 /**
  *
@@ -132,7 +132,7 @@ public class Function {
      
     public double getRi(double x){
         
-      return STEP * Math.abs(getVi(x))/ getKi(x);          
+      return H * Math.abs(getVi(x))/ getKi(x);          
     }
     
     public double getAnalytic(double x){
@@ -163,7 +163,7 @@ public class Function {
                 value = x;
                 break;
             case 2:
-                value = 1;
+                value = x * x + 4;
                 break;
             case 3:
                 value = 1;
@@ -181,7 +181,7 @@ public class Function {
                 value =  x;
                 break;
             case 2:
-                value = 1;
+                value = 4;
                 break;
             case 3:
                 value = 1;
@@ -191,14 +191,15 @@ public class Function {
         }
       return value;          
     }
+    
     public double getAi(double x){
         double value;
         switch (this.variant) {
             case 1:
-                value = 1;
+                value = 2;
                 break;
             case 2:
-                value = 1;
+                value = 4;
                 break;
             case 3:
                 value = 1;
@@ -207,6 +208,14 @@ public class Function {
                 throw new AssertionError();
         }
       return value;          
+    }
+
+    public double getUi(double H) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public double getGi(double d, double d0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
   

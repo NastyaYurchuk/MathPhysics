@@ -77,7 +77,7 @@ public class DynamicChart {
 
     }
 
-    public void buildAndGo(double[] x, double[][] y) {
+    public void buildAndGo(double[] x, double[][] y, double[][] yEx, double[][] yIm, double[][] yCenEx, double[][] yCenIm, double[][] yCenImCr) {
         JFrame frame = new JFrame(); //створюємо каркас вікна
         frame.setTitle("Графік");    //заголовок вікна
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,18 +85,32 @@ public class DynamicChart {
         int m = y.length;
         int n = y[0].length;
         System.out.println("n = " + n + " m = " + m);
-        XYSeries series = new XYSeries("Ряд1 1");
+        XYSeries series = new XYSeries("Analitic");
+        XYSeries series1 = new XYSeries("Right Explicit");
+        XYSeries series2 = new XYSeries("Right Implicit");
+        XYSeries series3 = new XYSeries("Central Impicit");
+        XYSeries series4 = new XYSeries("Central Impicit Crunk");
+        XYSeries series5 = new XYSeries("Central Explicit");
         //додаємо точки на графіку
        for (int k = 0; k < n; k++) {
-                series.addOrUpdate(x[k], y[0][k]);
-               // System.out.println("x " + x[k] + " y " + y[0][k]);
+            series.addOrUpdate(x[k], y[0][k]);
+            series1.addOrUpdate(x[k], yEx[0][k]);
+            series2.addOrUpdate(x[k], yIm[0][k]);
+            series3.addOrUpdate(x[k], yCenIm[0][k]);
+            series4.addOrUpdate(x[k], yCenImCr[0][k]);
+          //  series5.addOrUpdate(x[k], yCenEx[0][k]);
             }
 // зразу ж додаємо ряд в набір даних
         XYSeriesCollection data = new XYSeriesCollection(series);
+        data.addSeries(series1);
+        data.addSeries(series2);
+        data.addSeries(series3);
+        data.addSeries(series4);
+      //  data.addSeries(series5);
         //   data.addSeries(series2); // додаємо другий ряд в набір
 //створюємо діаграму
         JFreeChart chart = ChartFactory.createXYLineChart(
-                "XY Series Example",
+                "",
                 "X",
                 "Y",
                 data,
@@ -117,7 +131,7 @@ public class DynamicChart {
         frame.setVisible(true);
         System.out.println("0 sec");
         try {
-            sleep(15000);
+            sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(DynamicChart.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -125,9 +139,11 @@ public class DynamicChart {
         for (int j = 1; j < m; j++) {
 
             for (int k = 0; k < n; k++) {
-                //series.addOrUpdate(x[k], y[j][k]);
                 series.updateByIndex(k, y[j][k]);
-             //   System.out.println("x " + x[k] + " y " + y[j][k]);
+                series1.updateByIndex(k, yEx[j][k]);
+                series2.updateByIndex(k, yIm[j][k]);
+                series3.updateByIndex(k, yCenIm[j][k]);
+                series4.updateByIndex(k, yCenImCr[j][k]);
             }
           //  System.out.println("0 sec");
         try {
